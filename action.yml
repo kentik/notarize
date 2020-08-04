@@ -1,0 +1,35 @@
+name: notarize
+description: Submit an artifact to the Kentik Notary
+inputs:
+  name:
+    description: Artifact name
+    required: true
+  version:
+    description: Artifact version
+    required: true
+  arch:
+    description: Artifact architecture
+    required: true
+  system:
+    description: Artifact operating system
+    required: true
+  artifact:
+    description: Artifact
+    required: true
+runs:
+  using: docker
+  image: docker://kentik/notary:latest
+  args:
+    - submit
+    - --name
+    - ${{ inputs.name }}
+    - --version
+    - ${{ inputs.version }}
+    - --arch
+    - ${{ inputs.arch }}
+    - --system
+    - ${{ inputs.system }}
+    - ${{ inputs.artifact }}
+branding:
+  color: blue
+  icon: box
